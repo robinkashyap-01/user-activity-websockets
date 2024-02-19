@@ -35,4 +35,5 @@ window.Echo = new Echo({
     enabledTransports: ["ws", "wss"],
     enabledTransports: ["ws"],
     disableStats: true,
+    // authEndpoint: '/autentication',
 });

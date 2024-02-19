@@ -33,29 +33,8 @@
         </div>
     </div>
     <script>
-        function sendRequest() {
-            // Retrieve CSRF token value from meta tag
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-            // Send AJAX request with CSRF token
-            $.ajax({
-                url: "{{ route('trace-status') }}",
-                method: 'POST', // or 'GET' depending on your controller route
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken // Include CSRF token in headers
-                },
-                success: function(response) {
-                },
-                error: function(xhr, status, error) {
-                    // Handle error response
-                    console.error('AJAX request error:', error);
-                }
-            });
-        }
-
-        // Send AJAX request every 5 seconds
-        setInterval(sendRequest, 5000); // 5000 milliseconds = 5 seconds
-        window.Echo.channel('activity').listen('UserStatus', (e) => {
+        let userId = @json(Auth::user()->id);
+        Echo.channel('activity').listen('UserStatus', (e) => {
             let userId = e.user_id;
             let status = e.status;
             console.log(e);

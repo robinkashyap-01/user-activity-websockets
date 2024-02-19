@@ -20,8 +20,7 @@ class UserStatus implements ShouldBroadcast
     public function __construct(
         public $status,
         public $user_id,
-    )
-    {
+    ) {
         $this->status = $status;
         $this->user_id = $user_id;
     }
@@ -33,9 +32,8 @@ class UserStatus implements ShouldBroadcast
      */
     public function broadcastOn(): array
     {
-        return [
-            // new PrivateChannel('channel-name'),
-            new Channel("activity"),
-        ];
+        // $channel = new PrivateChannel("status.{$this->user_id}");
+        // dd($channel);
+        return [new Channel('activity')];
     }
 }
